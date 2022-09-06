@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/static/css/app.css">
+    <script src="/static/js/app.js"></script>
+</head>
+
+<body>
+<header>
+    microgrid data display log
+</header>
+<nav>
+    <ul>
+        <li>
+
+            <a target="_blank" href="/"> home</a>
+        </li>
+        <li>
+            <a target="_blank" href="/blog/auth">login</a>
+        </li>
+        <li>
+            <a target="_blank" href="/blog/manage"> manage</a>
+        </li>
+    </ul>
+</nav>
+<main>
+    <h1>my microgrid blog</h1>
+
+        {% block code %}
+        {% for post in posts %}
+          <div class="post">
+
+
+              <strong>{{post[1]}}</strong>
+              <p>{{post[2]}}</p>
+          </div>
+        {% endfor %}
+        {% endblock %}
+    <form method="post" action="/blog/manage/post">
+        <label for="posttitle">
+            title
+            <input type="text" required minlength="1" id="posttitle" name="title">
+        </label>
+        <label for="posttext">
+            text
+            <input type="text" required minlength="1" id="posttext" name="text">
+        </label>
+        <label for="post_time">
+            post
+            <input type="datetime-local" id="post_time" name="post_time">
+        </label>
+    </form>
+</main>
+<footer>
+    made my afheisleycook at github link to my github <a href="https://github.com/afheisleycook">profile</a>
+</footer>
+</body>
+</html>

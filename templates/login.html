@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/app.css">
+    <script src="/static/js/app.js"></script>
+</head>
+<body>
+<header>
+  microgrid test
+</header>
+<nav>
+    <ul>
+        <li>
+
+            <a target="_blank" href="/"> home</a>
+        </li>
+        <li>
+            <a target="_blank" href="/blog/login/">login</a>
+        </li>
+        <li>
+            <a target="_blank" href="/blog/manage"> manage</a>
+        </li>
+    </ul>
+</nav>
+<main>
+    <form action="/blog/auth/login" method="post">
+        <label for="useremail">
+            useremail
+            <input id="useremail" required type="email" name="useremail">
+        </label>
+        <br>
+        <label for="username">
+            username
+            <input id="username"  required type="text" name="username">
+        </label>
+        <br>
+         <label for="userpassword">
+             password
+            <input id="userpassword" required minlength="6" type="password" name="userpassword">
+        </label>
+        <br>
+        <label for="addpost">
+            <input id="addpost" type="submit" value="go">
+        </label>
+
+
+    </form>
+</main>
+<footer>
+  <script>
+      let date = new Date();
+      document.append(date);
+  </script>
+</footer>
+</body>
+</html>

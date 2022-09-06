@@ -1,0 +1,13 @@
+header {
+background: darkblue;
+color:white;
+}
+nav ul li {
+display:inline-block;
+}
+main .post {
+}
+footer {
+background: darkblue;
+color:white;
+}
