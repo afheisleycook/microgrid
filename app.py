@@ -28,12 +28,15 @@ loggedin = False
 import sqlite3
 @app.route("/blog/manage")
 def dash():
-    if loggedin:
-        return render_template("/dash/index.html")
-    if not loggedin:
-        return redirect("/")
-    else:
-        return rne
+    try:
+        if loggedin:
+            return render_template("/dash/index.html")
+        if not loggedin:
+            return redirect("/")
+    except Exception as e:
+        error = e.args
+        return render_template("error/index.html",error=error)
+
 @app.route("/")
 def Home():
     """:return main page"""
