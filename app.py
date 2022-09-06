@@ -30,10 +30,10 @@ import sqlite3
 def dash():
     if loggedin:
         return render_template("/dash/index.html")
-    if not loggedin  :
+    if not loggedin:
         return redirect("/")
     else:
-        return Exception.args
+        return rne
 @app.route("/")
 def Home():
     """:return main page"""

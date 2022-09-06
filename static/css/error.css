@@ -1,0 +1,15 @@
+.error {
+border:4px red solid;
+background:lightgrey;
+font-family:san-serif;
+font-size:14px;
+color:red;
+position:absolute;
+top:80px;
+left:100px;
+}
+.error .title
+{
+ color:#4ff;
+
+}
