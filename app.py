@@ -1,11 +1,12 @@
+import datetime
+import logging
 import random
 import secrets
-from sqlite3 import Connection, Cursor
-
-from flask import(Flask, redirect, render_template, session, request, request_finished, flash,copy_current_request_context)
 import sqlite3
-import  datetime
-import  logging
+from flask import (Flask, redirect, render_template, session, request, request_finished, flash,
+                   copy_current_request_context)
+from flask_login import login_required
+from sqlite3 import Connection, Cursor
 
 """
 data = {
@@ -26,6 +27,9 @@ app = Flask(__name__)
 app.secret_key = secrets.token_hex()
 loggedin = False
 import sqlite3
+
+
+@login_required
 @app.route("/blog/manage")
 def dash():
     try:
@@ -35,12 +39,15 @@ def dash():
             return redirect("/")
     except Exception as e:
         error = e.args
-        return render_template("error/index.html",error=error)
+        return render_template("error/index.html", error=error)
+
 
 @app.route("/")
 def Home():
     """:return main page"""
     return redirect("/blog")
+
+
 @app.route("/blog")
 def main():
     """
@@ -50,26 +57,30 @@ def main():
     db = sqlite3.connect("app.db")
     conn = db.cursor()
     posts = conn.execute("select * from energy").fetchall()
-    return render_template("index.html",posts=posts)
+    return render_template("index.html", posts=posts)
+
+
 @app.route("/blog/auth")
 def auth():
     return render_template("login.html")
-@app.route("/blog/auth/login",methods=["post"])
+
+
+@app.route("/blog/auth/login", methods=["post"])
 def login():
     db: Connection = sqlite3.connect("app.db")
     connect: Cursor = db.cursor()
     username = request.form["username"]
-    useremail = request.form["useremail"]
+    useremail: str = request.form["useremail"]
     userpassword = request.form["userpassword"]
-    Auth = db.execute(f"select * from MUSER Where MUSER_USERNAME='{username}' or MUSER_USEREMAIL='{useremail}' and MUSER_PASSWORD='{userpassword}'")
+    Auth = db.execute(
+        f"select * from MUSER Where MUSER_USERNAME='{username}' or MUSER_USEREMAIL='{useremail}' and MUSER_PASSWORD='{userpassword}'")
     Auth_data = Auth.fetchall()
-    if Auth_data == Auth:
-        loggedin=True
+    if Auth_data in Auth:
+        loggedin = True
         redirect("/blog/manage")
     else:
         loggedin = False
         return redirect("/blog/auth")
 
-
-
-app.run(port=8080,debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0.0", port=80, debug=True)
